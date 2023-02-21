@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -9,20 +8,17 @@ namespace API.Controllers
     public class BuggyController : BaseApiController
     {
         private readonly DataContext _context;
-
         public BuggyController(DataContext context)
         {
             _context = context;
         }
 
-
         [Authorize]
         [HttpGet("auth")]
-        public ActionResult<string> GetSecrets()
+        public ActionResult<string> GetSecret()
         {
-            return "secrets text";
+            return "secret text";
         }
-
 
         [HttpGet("not-found")]
         public ActionResult<AppUser> GetNotFound()
@@ -32,7 +28,6 @@ namespace API.Controllers
             if (thing == null) return NotFound();
 
             return thing;
-
         }
 
         [HttpGet("server-error")]
@@ -50,7 +45,5 @@ namespace API.Controllers
         {
             return BadRequest("This was not a good request");
         }
-
-
     }
 }
